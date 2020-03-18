@@ -1,0 +1,35 @@
+Collections:
+
+users
+posts
+i feel yous
+
+-----------------------------
+
+users document:
+first name -> string,
+last name -> string,
+email -> string,
+username -> string,
+gender -> string,
+school -> string,
+graduation year -> integer,
+company -> string,
+pronouns -> string,
+bio -> string,
+createdAt -> timestamp,
+lastActive -> timestamp
+
+posts document: 
+userId -> string,
+anon -> boolean, 
+title -> string,
+createdAt -> timestamp,
+body -> string,
+
+
+i feel yous document:
+felt -> boolean,
+postId -> string,
+userId -> string
+

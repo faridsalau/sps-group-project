@@ -49,6 +49,8 @@
     background: #ffffff;
     color: #000;
     border-radius: 3px;
+    border: #000 1px solid;
+    padding: 10px;
   }
 
   i {

@@ -1,46 +1,85 @@
+<script>
+  import Signup from "../components/Signup.svelte";
+  import Login from "../components/Login.svelte";
+  let clicked = false;
+  const handleClick = () => (clicked = !clicked);
+</script>
+
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
+  :global(body) {
+    background: url(/images/home-image.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  nav {
+    color: #67bef4;
+  }
+  span {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .navbar {
+    padding: 1rem 2rem;
+  }
+  .definition {
+    font-style: italic;
+    color: #8cc9ff;
+  }
+  .quote-card {
+    width: 300px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 3px;
+    max-height: 120px;
+  }
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
+  .quote-card p {
+    margin: 10px auto;
+    color: #000;
+    font-size: 18px;
+  }
 
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
+  .col-md-5 {
+    margin: 20px 15px;
+    background: #ffffff;
+    color: #000;
+    border-radius: 3px;
+  }
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+  <title>mélangity | share your diverse perspective</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<nav class="navbar ">
+  <span class="navbar-brand mb-0 h1">mélangity</span>
+</nav>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+<div class="container">
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+  <p class="definition">mé·lange - a mixture; a medley.</p>
+
+  <!-- row start -->
+  <div class="row">
+    <div class="quote-card col">
+      <p>
+        “Diversity is about all of us, and about us having to figure out how to
+        walk through this world together. ” - Jacqueline Woodson
+      </p>
+    </div>
+
+    <div class="col-md-5">
+      <h2>Share your diverse perspective today!</h2>
+      {#if clicked}
+        <Login on:clicked={handleClick} />
+      {:else}
+        <Signup on:clicked={handleClick} />
+      {/if}
+    </div>
+
+  </div>
+  <!-- row end -->
+
+</div>

@@ -3,6 +3,7 @@ Collections:
 users
 posts
 i feel yous
+comments
 
 -----------------------------
 
@@ -30,6 +31,12 @@ body -> string,
 
 i feel yous document:
 felt -> boolean,
+postId -> string,
+userId -> string
+
+
+comments document:
+comment -> boolean,
 postId -> string,
 userId -> string
 

@@ -18,6 +18,10 @@
     padding: 5px;
   }
 
+  input:focus {
+    border: #8cc9ff 1px solid;
+  }
+
   button {
     margin-bottom: 10px;
   }
@@ -47,5 +51,3 @@
 New here?
 <p on:click={clicked}>Sign Up</p>
 <p id="last-p">Forgot password</p>
-
-<!-- TODO: Add switch from login to signup pages on sign up click -->

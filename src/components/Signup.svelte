@@ -3,11 +3,10 @@
   let password = "";
   let firstName = "";
   let lastName = "";
-
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   function clicked() {
-    dispatch("clicked", true);
+    dispatch("clicked");
   }
 </script>
 
@@ -19,6 +18,10 @@
     width: 70%;
     outline: none;
     padding: 5px;
+  }
+
+  input:focus {
+    border: #8cc9ff 1px solid;
   }
 
   button {

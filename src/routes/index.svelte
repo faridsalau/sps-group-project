@@ -60,18 +60,19 @@
 <div class="container">
 
   <p class="definition">mé·lange - a mixture; a medley.</p>
-
-  <!-- row start -->
   <div class="row">
     <div class="quote-card col">
       <p>
         “Diversity is about all of us, and about us having to figure out how to
-        walk through this world together. ” - Jacqueline Woodson
+        walk through this world together.” - Jacqueline Woodson
       </p>
     </div>
 
     <div class="col-md-5">
-      <h2>Share your diverse perspective today!</h2>
+      <h4>
+        We all have different experiences in tech.
+        <b>Share your diverse perspective today!</b>
+      </h4>
       {#if clicked}
         <Login on:clicked={handleClick} />
       {:else}
@@ -80,6 +81,4 @@
     </div>
 
   </div>
-  <!-- row end -->
-
 </div>

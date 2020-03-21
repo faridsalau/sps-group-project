@@ -1,12 +1,11 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import {
-    isValidEmail,
-    isValidName,
-    isValidPassword,
-    isEmpty
-  } from "../util/validators.js";
-  import signupErrors from "../util/signup/signupErrors.js";
+    handleEmailBlur,
+    handleFirstNameBlur,
+    handleLastNameBlur,
+    handlePasswordBlur
+  } from "../util/homePageBlur.js";
   let email = "";
   let password = "";
   let firstName = "";
@@ -16,35 +15,21 @@
   function clicked() {
     dispatch("clicked");
   }
-  function handleBlur(e) {
-    if (e.target.name === "first-name") {
-      if (isEmpty(firstName) || !isValidName(firstName)) {
-        errors.firstName = signupErrors.firstName;
-      } else {
-        delete errors.firstName;
-      }
-    }
-    if (e.target.name === "last-name") {
-      if (isEmpty(lastName) || !isValidName(lastName)) {
-        errors.lastName = signupErrors.lastName;
-      } else {
-        delete errors.lastName;
-      }
-    }
-    if (e.target.name === "email") {
-      if (isEmpty(email) || !isValidEmail(email)) {
-        errors.email = signupErrors.email;
-      } else {
-        delete errors.email;
-      }
-    }
-    if (e.target.name === "password") {
-      if (isEmpty(password) || !isValidPassword(password)) {
-        errors.password = signupErrors.password;
-      } else {
-        delete errors.password;
-      }
-    }
+  function _handleFirstNameBlur() {
+    handleFirstNameBlur(firstName, errors);
+    errors = errors;
+  }
+  function _handleLastNameBlur() {
+    handleLastNameBlur(lastName, errors);
+    errors = errors;
+  }
+  function _handleEmailBlur() {
+    handleEmailBlur(email, errors);
+    errors = errors;
+  }
+  function _handlePasswordBlur() {
+    handlePasswordBlur(password, errors);
+    errors = errors;
   }
 </script>
 
@@ -74,6 +59,9 @@
     cursor: pointer;
     display: inline-block;
   }
+  .error {
+    color: rgb(255, 0, 0);
+  }
 </style>
 
 <form on:submit|preventDefault>
@@ -83,32 +71,48 @@
       name="first-name"
       placeholder="First Name"
       bind:value={firstName}
-      on:blur={handleBlur} />
+      on:blur={_handleFirstNameBlur} />
+    {#if errors.firstName}
+      <p class="error">{errors.firstName}</p>
+    {/if}
   </div>
+
   <div class="form-group">
     <input
       type="text"
       name="last-name"
       placeholder="Last Name"
       bind:value={lastName}
-      on:blur={handleBlur} />
+      on:blur={_handleLastNameBlur} />
+    {#if errors.lastName}
+      <p class="error">{errors.lastName}</p>
+    {/if}
   </div>
+
   <div class="form-group">
     <input
       type="email"
       name="email"
       placeholder="Email"
       bind:value={email}
-      on:blur={handleBlur} />
+      on:blur={_handleEmailBlur} />
+    {#if errors.email}
+      <p class="error">{errors.email}</p>
+    {/if}
   </div>
+
   <div class="form-group">
     <input
       type="password"
       name="password"
       placeholder="Password"
       bind:value={password}
-      on:blur={handleBlur} />
+      on:blur={_handlePasswordBlur} />
+    {#if errors.password}
+      <p class="error">{errors.password}</p>
+    {/if}
   </div>
+
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
 Have an account?

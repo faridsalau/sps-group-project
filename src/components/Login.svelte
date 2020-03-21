@@ -1,10 +1,20 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { handleEmailBlur, handlePasswordBlur } from "../util/homePageBlur.js";
   let email = "";
   let password = "";
+  let errors = {};
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");
+  }
+  function _handleEmailBlur() {
+    handleEmailBlur(email, errors);
+    errors = errors;
+  }
+  function _handlePasswordBlur() {
+    handlePasswordBlur(password, errors);
+    errors = errors;
   }
 </script>
 
@@ -38,15 +48,35 @@
     cursor: pointer;
     display: inline-block;
   }
+
+  .error {
+    color: rgb(255, 0, 0);
+  }
 </style>
 
 <form on:submit|preventDefault>
   <div class="form-group">
-    <input type="email" placeholder="Email" bind:value={email} />
+    <input
+      type="email"
+      placeholder="Email"
+      bind:value={email}
+      on:blur={_handleEmailBlur} />
+    {#if errors.email}
+      <p class="error">{errors.email}</p>
+    {/if}
   </div>
+
   <div class="form-group">
-    <input type="password" placeholder="Password" bind:value={password} />
+    <input
+      type="password"
+      placeholder="Password"
+      bind:value={password}
+      on:blur={_handlePasswordBlur} />
+    {#if errors.password}
+      <p class="error">{errors.password}</p>
+    {/if}
   </div>
+
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
 New here?

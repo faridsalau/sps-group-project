@@ -1,7 +1,7 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   let email = "";
   let password = "";
-  import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");

@@ -7,29 +7,31 @@
     handleLastNameBlur,
     handlePasswordBlur
   } from "../util/homePageBlur.js";
-  let email = "";
-  let password = "";
-  let firstName = "";
-  let lastName = "";
+  let newUser = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: ""
+  };
   let errors = {};
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");
   }
   function _handleFirstNameBlur() {
-    handleFirstNameBlur(firstName, errors);
+    handleFirstNameBlur(newUser.firstName, errors);
     errors = errors;
   }
   function _handleLastNameBlur() {
-    handleLastNameBlur(lastName, errors);
+    handleLastNameBlur(newUser.lastName, errors);
     errors = errors;
   }
   function _handleEmailBlur() {
-    handleEmailBlur(email, errors);
+    handleEmailBlur(newUser.email, errors);
     errors = errors;
   }
   function _handlePasswordBlur() {
-    handlePasswordBlur(password, errors);
+    handlePasswordBlur(newUser.password, errors);
     errors = errors;
   }
 </script>
@@ -73,7 +75,7 @@
       type="text"
       name="first-name"
       placeholder="First Name"
-      bind:value={firstName}
+      bind:value={newUser.firstName}
       on:blur={_handleFirstNameBlur} />
     <ErrorMessage error={errors.firstName} />
   </div>
@@ -84,7 +86,7 @@
       type="text"
       name="last-name"
       placeholder="Last Name"
-      bind:value={lastName}
+      bind:value={newUser.lastName}
       on:blur={_handleLastNameBlur} />
     <ErrorMessage error={errors.lastName} />
   </div>
@@ -95,7 +97,7 @@
       type="email"
       name="email"
       placeholder="Email"
-      bind:value={email}
+      bind:value={newUser.email}
       on:blur={_handleEmailBlur} />
     <ErrorMessage error={errors.email} />
   </div>
@@ -106,7 +108,7 @@
       type="password"
       name="password"
       placeholder="Password"
-      bind:value={password}
+      bind:value={newUser.password}
       on:blur={_handlePasswordBlur} />
     <ErrorMessage error={errors.password} />
   </div>

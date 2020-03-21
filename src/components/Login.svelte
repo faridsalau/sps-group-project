@@ -2,19 +2,21 @@
   import { createEventDispatcher } from "svelte";
   import { handleEmailBlur, handlePasswordBlur } from "../util/homePageBlur.js";
   import ErrorMessage from "./ErrorMessage.svelte";
-  let email = "";
-  let password = "";
+  let user = {
+    email: "",
+    password: ""
+  };
   let errors = {};
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");
   }
   function _handleEmailBlur() {
-    handleEmailBlur(email, errors);
+    handleEmailBlur(user.email, errors);
     errors = errors;
   }
   function _handlePasswordBlur() {
-    handlePasswordBlur(password, errors);
+    handlePasswordBlur(user.password, errors);
     errors = errors;
   }
 </script>
@@ -66,7 +68,7 @@
       class:error={errors.email}
       type="email"
       placeholder="Email"
-      bind:value={email}
+      bind:value={user.email}
       on:blur={_handleEmailBlur} />
     <ErrorMessage error={errors.email} />
   </div>
@@ -76,7 +78,7 @@
       class:error={errors.password}
       type="password"
       placeholder="Password"
-      bind:value={password}
+      bind:value={user.password}
       on:blur={_handlePasswordBlur} />
     <ErrorMessage error={errors.password} />
   </div>

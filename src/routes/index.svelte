@@ -2,7 +2,7 @@
   import Signup from "../components/Signup.svelte";
   import Login from "../components/Login.svelte";
   let clicked = false;
-  const handleClick = () => (clicked = !clicked);
+  const handleClicked = () => (clicked = !clicked);
 </script>
 
 <style>
@@ -82,9 +82,9 @@
         <b>Share your diverse perspective today!</b>
       </h4>
       {#if clicked}
-        <Login on:clicked={handleClick} />
+        <Login on:clicked={handleClicked} />
       {:else}
-        <Signup on:clicked={handleClick} />
+        <Signup on:clicked={handleClicked} />
       {/if}
     </div>
 

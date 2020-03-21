@@ -51,6 +51,7 @@
 
   .error {
     color: rgb(255, 0, 0);
+    cursor: context-menu;
   }
 </style>
 

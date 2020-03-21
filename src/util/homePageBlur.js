@@ -32,7 +32,7 @@ export const handleEmailBlur = (email, errors) => {
 
 export const handlePasswordBlur = (password, errors) => {
   if (isEmpty(password) || !isValidPassword(password)) {
-    errors.password = signupErrors.password;
+    errors.password = homePageErrors.password;
   } else {
     delete errors.password;
   }

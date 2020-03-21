@@ -32,7 +32,10 @@
     margin: 20px;
     background-color: #fff;
     border-radius: 3px;
-    max-height: 120px;
+    max-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .quote-card p {
@@ -46,6 +49,10 @@
     background: #ffffff;
     color: #000;
     border-radius: 3px;
+  }
+
+  i {
+    color: #6c7780;
   }
 </style>
 
@@ -64,7 +71,8 @@
     <div class="quote-card col">
       <p>
         “Diversity is about all of us, and about us having to figure out how to
-        walk through this world together.” - Jacqueline Woodson
+        walk through this world together.”
+        <i>- Jacqueline Woodson</i>
       </p>
     </div>
 

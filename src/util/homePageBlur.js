@@ -4,11 +4,11 @@ import {
   isValidPassword,
   isEmpty
 } from "./validators.js";
-import signupErrors from "./homePageErrors.js";
+import homePageErrors from "./homePageErrors.js";
 
 export const handleFirstNameBlur = (firstName, errors) => {
   if (isEmpty(firstName) || !isValidName(firstName)) {
-    errors.firstName = signupErrors.firstName;
+    errors.firstName = homePageErrors.firstName;
   } else {
     delete errors.firstName;
   }
@@ -16,7 +16,7 @@ export const handleFirstNameBlur = (firstName, errors) => {
 
 export const handleLastNameBlur = (lastName, errors) => {
   if (isEmpty(lastName) || !isValidName(lastName)) {
-    errors.lastName = signupErrors.lastName;
+    errors.lastName = homePageErrors.lastName;
   } else {
     delete errors.lastName;
   }
@@ -24,7 +24,7 @@ export const handleLastNameBlur = (lastName, errors) => {
 
 export const handleEmailBlur = (email, errors) => {
   if (isEmpty(email) || !isValidEmail(email)) {
-    errors.email = signupErrors.email;
+    errors.email = homePageErrors.email;
   } else {
     delete errors.email;
   }

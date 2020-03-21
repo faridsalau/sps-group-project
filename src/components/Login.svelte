@@ -16,6 +16,7 @@
     width: 70%;
     outline: none;
     padding: 5px;
+    transition: border 0.5s;
   }
 
   input:focus {

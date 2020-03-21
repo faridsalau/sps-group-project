@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { handleEmailBlur, handlePasswordBlur } from "../util/homePageBlur.js";
+  import ErrorMessage from "./ErrorMessage.svelte";
   let email = "";
   let password = "";
   let errors = {};
@@ -53,29 +54,31 @@
     color: rgb(255, 0, 0);
     cursor: context-menu;
   }
+
+  input.error {
+    border: rgb(255, 0, 0) 1px solid;
+  }
 </style>
 
 <form on:submit|preventDefault>
   <div class="form-group">
     <input
+      class:error={errors.email}
       type="email"
       placeholder="Email"
       bind:value={email}
       on:blur={_handleEmailBlur} />
-    {#if errors.email}
-      <p class="error">{errors.email}</p>
-    {/if}
+    <ErrorMessage error={errors.email} />
   </div>
 
   <div class="form-group">
     <input
+      class:error={errors.password}
       type="password"
       placeholder="Password"
       bind:value={password}
       on:blur={_handlePasswordBlur} />
-    {#if errors.password}
-      <p class="error">{errors.password}</p>
-    {/if}
+    <ErrorMessage error={errors.password} />
   </div>
 
   <button type="submit" class="btn btn-primary">Login</button>

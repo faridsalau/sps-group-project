@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import ErrorMessage from "./ErrorMessage.svelte";
   import {
     handleEmailBlur,
     handleFirstNameBlur,
@@ -59,59 +60,55 @@
     cursor: pointer;
     display: inline-block;
   }
-  .error {
-    color: rgb(255, 0, 0);
-    cursor: context-menu;
+
+  input.error {
+    border: rgb(255, 0, 0) 1px solid;
   }
 </style>
 
 <form on:submit|preventDefault>
   <div class="form-group">
     <input
+      class:error={errors.firstName}
       type="text"
       name="first-name"
       placeholder="First Name"
       bind:value={firstName}
       on:blur={_handleFirstNameBlur} />
-    {#if errors.firstName}
-      <p class="error">{errors.firstName}</p>
-    {/if}
+    <ErrorMessage error={errors.firstName} />
   </div>
 
   <div class="form-group">
     <input
+      class:error={errors.lastName}
       type="text"
       name="last-name"
       placeholder="Last Name"
       bind:value={lastName}
       on:blur={_handleLastNameBlur} />
-    {#if errors.lastName}
-      <p class="error">{errors.lastName}</p>
-    {/if}
+    <ErrorMessage error={errors.lastName} />
   </div>
 
   <div class="form-group">
     <input
+      class:error={errors.email}
       type="email"
       name="email"
       placeholder="Email"
       bind:value={email}
       on:blur={_handleEmailBlur} />
-    {#if errors.email}
-      <p class="error">{errors.email}</p>
-    {/if}
+    <ErrorMessage error={errors.email} />
   </div>
 
   <div class="form-group">
     <input
+      class:error={errors.password}
       type="password"
       name="password"
       placeholder="Password"
       bind:value={password}
       on:blur={_handlePasswordBlur} />
-    {#if errors.password}
-      <p class="error">{errors.password}</p>
-    {/if}
+    <ErrorMessage error={errors.password} />
   </div>
 
   <button type="submit" class="btn btn-primary">Sign Up</button>

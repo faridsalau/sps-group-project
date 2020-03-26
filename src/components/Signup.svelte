@@ -1,18 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import ErrorMessage from "./ErrorMessage.svelte";
+  import { newUser } from "../util/dataRepresentations.js";
   import {
     handleEmailBlur,
     handleFirstNameBlur,
     handleLastNameBlur,
     handlePasswordBlur
   } from "../util/homePageBlur.js";
-  let newUser = {
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: ""
-  };
   let errors = {};
   const dispatch = createEventDispatcher();
   function clicked() {

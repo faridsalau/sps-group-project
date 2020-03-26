@@ -1,9 +1,12 @@
-export const isEmpty = string => {
-  if (string.trim() === "") return true;
-  else return false;
+export const isEmpty = item => {
+  if (typeof item === "object") {
+    return Object.keys(item).length === 0;
+  }
+  if (typeof item === "string") {
+    if (item.trim() === "") return true;
+    else return false;
+  }
 };
-
-export const isEmptyObject = obj => Object.keys(obj).length === 0;
 
 export const isValidEmail = email => {
   const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

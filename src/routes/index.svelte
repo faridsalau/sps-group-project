@@ -1,17 +1,6 @@
 <script>
   import Signup from "../components/Signup.svelte";
   import Login from "../components/Login.svelte";
-  import Spinner from "../components/Spinner.svelte";
-  import { onMount } from "svelte";
-  let auth;
-  let loggedIn$;
-  let loading = true;
-  onMount(async () => {
-    const { _loggedIn$, _auth } = await import("../firebase.js");
-    auth = _auth;
-    loggedIn$ = _loggedIn$;
-    loading = false;
-  });
   let clicked = false;
   const handleClicked = () => (clicked = !clicked);
 </script>
@@ -55,10 +44,6 @@
     font-size: 18px;
   }
 
-  .spinner {
-    margin: 100px auto;
-  }
-
   .col-md-5 {
     margin: 20px 15px;
     background: #ffffff;
@@ -81,35 +66,27 @@
 </nav>
 
 <div class="container">
-
-  {#if loading}
-    <div class="spinner">
-      <Spinner position="text-center" color="text-primary" size="4" />
-      <p class="text-center">Loading...</p>
+  <p class="definition">mé·lange - a mixture; a medley.</p>
+  <div class="row">
+    <div class="quote-card col">
+      <p>
+        “Diversity is about all of us, and about us having to figure out how to
+        walk through this world together.”
+        <i>- Jacqueline Woodson</i>
+      </p>
     </div>
-  {:else}
-    <p class="definition">mé·lange - a mixture; a medley.</p>
-    <div class="row">
-      <div class="quote-card col">
-        <p>
-          “Diversity is about all of us, and about us having to figure out how
-          to walk through this world together.”
-          <i>- Jacqueline Woodson</i>
-        </p>
-      </div>
 
-      <div class="col-md-5">
-        <h4>
-          We all have different experiences in tech.
-          <b>Share your diverse perspective today!</b>
-        </h4>
-        {#if clicked}
-          <Login on:clicked={handleClicked} />
-        {:else}
-          <Signup on:clicked={handleClicked} />
-        {/if}
-      </div>
-
+    <div class="col-md-5">
+      <h4>
+        We all have different experiences in tech.
+        <b>Share your diverse perspective today!</b>
+      </h4>
+      {#if clicked}
+        <Login on:clicked={handleClicked} />
+      {:else}
+        <Signup on:clicked={handleClicked} />
+      {/if}
     </div>
-  {/if}
+
+  </div>
 </div>

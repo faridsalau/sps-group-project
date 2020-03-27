@@ -2,7 +2,11 @@
   import { createEventDispatcher } from "svelte";
   import { handleEmailBlur, handlePasswordBlur } from "../util/homePageBlur.js";
   import ErrorMessage from "./ErrorMessage.svelte";
-  import { user } from "../util/dataRepresentations.js";
+  // 'user' variable acts as component state, should not be refactored to another file
+  let user = {
+    email: "",
+    password: ""
+  };
   let errors = {};
   const dispatch = createEventDispatcher();
   function clicked() {

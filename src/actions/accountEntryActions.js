@@ -3,8 +3,8 @@ import { trimObjValues } from "../util/utilFunctions.js";
 export const signup = newUserData => {
   return new Promise((resolve, reject) => {
     const alreadyFoundError = new Error("usernameAlreadyExists");
-    const newUser = trimObjValues(newUserData);
     if (window.db) {
+      const newUser = trimObjValues(newUserData);
       const db = window.db;
       const auth = window.auth;
       db.doc(`/users/${newUser.username}`)
@@ -28,7 +28,7 @@ export const signup = newUserData => {
             username: newUser.username,
             createdAt: new Date().toISOString()
           };
-          return db.doc(`/users/${newUser.username}`).set(userCredentials);
+          resolve(db.doc(`/users/${newUser.username}`).set(userCredentials));
         })
         .catch(err => {
           let error = "Something went wrong, please try again";
@@ -48,8 +48,8 @@ export const signup = newUserData => {
 
 export const login = userData => {
   return new Promise((resolve, reject) => {
-    const user = trimObjValues(userData);
     if (window.auth) {
+      const user = trimObjValues(userData);
       const auth = window.auth;
       auth
         .signInWithEmailAndPassword(user.email, user.password)

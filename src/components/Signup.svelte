@@ -1,39 +1,56 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import ErrorMessage from "./ErrorMessage.svelte";
+  import { isEmpty } from "../util/utilFunctions.js";
+  import { signup } from "../actions/accountEntryActions.js";
+  import Spinner from "./Spinner.svelte";
   import {
-    handleEmailBlur,
-    handleFirstNameBlur,
-    handleLastNameBlur,
-    handlePasswordBlur
-  } from "../util/homePageBlur.js";
+    handleEmail,
+    handleFirstName,
+    handleLastName,
+    handlePassword,
+    handleUserName
+  } from "../util/accountEntry.js";
+
   // 'newUser' variable acts as component state, should not be refactored to another file
   let newUser = {
     firstName: "",
     lastName: "",
+    username: "",
     email: "",
     password: ""
   };
   let errors = {};
+  let submissionError = "";
+  let loading = false;
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");
   }
-  function _handleFirstNameBlur() {
-    handleFirstNameBlur(newUser.firstName, errors);
-    errors = errors;
+
+  function handleSubmit() {
+    setErrors();
+    if (isEmpty(errors)) {
+      loading = true;
+      signup(newUser)
+        .then(() => {
+          loading = false;
+        })
+        .catch(err => {
+          loading = false;
+          submissionError = err;
+        });
+    }
   }
-  function _handleLastNameBlur() {
-    handleLastNameBlur(newUser.lastName, errors);
+
+  function setErrors() {
+    handleFirstName(newUser.firstName, errors);
+    handleLastName(newUser.lastName, errors);
+    handleEmail(newUser.email, errors);
+    handlePassword(newUser.password, errors);
+    handleUserName(newUser.username, errors);
     errors = errors;
-  }
-  function _handleEmailBlur() {
-    handleEmailBlur(newUser.email, errors);
-    errors = errors;
-  }
-  function _handlePasswordBlur() {
-    handlePasswordBlur(newUser.password, errors);
-    errors = errors;
+    submissionError = "";
   }
 </script>
 
@@ -67,54 +84,79 @@
   input.error {
     border: rgb(255, 0, 0) 1px solid;
   }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
-<form on:submit|preventDefault>
-  <div class="form-group">
-    <input
-      class:error={errors.firstName}
-      type="text"
-      name="first-name"
-      placeholder="First Name"
-      bind:value={newUser.firstName}
-      on:blur={_handleFirstNameBlur} />
-    <ErrorMessage error={errors.firstName} />
+{#if loading}
+  <div class="flex">
+    <Spinner color="blue" />
   </div>
+{:else}
 
-  <div class="form-group">
-    <input
-      class:error={errors.lastName}
-      type="text"
-      name="last-name"
-      placeholder="Last Name"
-      bind:value={newUser.lastName}
-      on:blur={_handleLastNameBlur} />
-    <ErrorMessage error={errors.lastName} />
-  </div>
+  <form on:submit|preventDefault={handleSubmit}>
+    <!-- TODO: Figure out how to place first name and last name fields next to each other -->
+    <div class="form-group">
+      <input
+        class:error={errors.firstName}
+        type="text"
+        name="first-name"
+        placeholder="First Name"
+        bind:value={newUser.firstName}
+        required />
+      <ErrorMessage error={errors.firstName} />
+    </div>
 
-  <div class="form-group">
-    <input
-      class:error={errors.email}
-      type="email"
-      name="email"
-      placeholder="Email"
-      bind:value={newUser.email}
-      on:blur={_handleEmailBlur} />
-    <ErrorMessage error={errors.email} />
-  </div>
+    <div class="form-group">
+      <input
+        class:error={errors.lastName}
+        type="text"
+        name="last-name"
+        placeholder="Last Name"
+        bind:value={newUser.lastName}
+        required />
+      <ErrorMessage error={errors.lastName} />
+    </div>
 
-  <div class="form-group">
-    <input
-      class:error={errors.password}
-      type="password"
-      name="password"
-      placeholder="Password"
-      bind:value={newUser.password}
-      on:blur={_handlePasswordBlur} />
-    <ErrorMessage error={errors.password} />
-  </div>
+    <div class="form-group">
+      <input
+        class:error={errors.username}
+        type="text"
+        name="username"
+        placeholder="Username"
+        bind:value={newUser.username}
+        required />
+      <ErrorMessage error={errors.username} />
+    </div>
 
-  <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
-Have an account?
-<p on:click={clicked}>Login</p>
+    <div class="form-group">
+      <input
+        class:error={errors.email}
+        type="email"
+        name="email"
+        placeholder="Email"
+        bind:value={newUser.email}
+        required />
+      <ErrorMessage error={errors.email} />
+    </div>
+
+    <div class="form-group">
+      <input
+        class:error={errors.password}
+        type="password"
+        name="password"
+        placeholder="Password"
+        bind:value={newUser.password}
+        required />
+      <ErrorMessage error={errors.password} />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <ErrorMessage error={submissionError} />
+  </form>
+  Have an account?
+  <p on:click={clicked}>Login</p>
+{/if}

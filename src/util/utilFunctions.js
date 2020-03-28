@@ -4,3 +4,13 @@ export const trimObjValues = obj => {
     return acc;
   }, {});
 };
+
+export const isEmpty = item => {
+  if (typeof item === "object") {
+    return Object.keys(item).length === 0;
+  }
+  if (typeof item === "string") {
+    if (item.trim() === "") return true;
+    else return false;
+  }
+};

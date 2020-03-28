@@ -1,24 +1,43 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { handleEmailBlur, handlePasswordBlur } from "../util/homePageBlur.js";
+  import { handleEmail, handlePassword } from "../util/accountEntry.js";
   import ErrorMessage from "./ErrorMessage.svelte";
+  import { isEmpty } from "../util/utilFunctions.js";
+  import { login } from "../actions/accountEntryActions.js";
+  import Spinner from "./Spinner.svelte";
   // 'user' variable acts as component state, should not be refactored to another file
   let user = {
     email: "",
     password: ""
   };
   let errors = {};
+  let submissionError = "";
+  let loading = false;
   const dispatch = createEventDispatcher();
   function clicked() {
     dispatch("clicked");
   }
-  function _handleEmailBlur() {
-    handleEmailBlur(user.email, errors);
+
+  function setErrors() {
+    handleEmail(user.email, errors);
+    handlePassword(user.password, errors);
     errors = errors;
+    submissionError = "";
   }
-  function _handlePasswordBlur() {
-    handlePasswordBlur(user.password, errors);
-    errors = errors;
+
+  function handleSubmit() {
+    setErrors();
+    if (isEmpty(errors)) {
+      loading = true;
+      login(user)
+        .then(() => {
+          loading = false;
+        })
+        .catch(err => {
+          loading = false;
+          submissionError = err;
+        });
+    }
   }
 </script>
 
@@ -60,31 +79,43 @@
   input.error {
     border: rgb(255, 0, 0) 1px solid;
   }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
-<form on:submit|preventDefault>
-  <div class="form-group">
-    <input
-      class:error={errors.email}
-      type="email"
-      placeholder="Email"
-      bind:value={user.email}
-      on:blur={_handleEmailBlur} />
-    <ErrorMessage error={errors.email} />
+{#if loading}
+  <div class="flex">
+    <Spinner color="blue" />
   </div>
+{:else}
+  <form on:submit|preventDefault={handleSubmit}>
+    <div class="form-group">
+      <input
+        class:error={errors.email}
+        type="email"
+        placeholder="Email"
+        bind:value={user.email}
+        required />
+      <ErrorMessage error={errors.email} />
+    </div>
 
-  <div class="form-group">
-    <input
-      class:error={errors.password}
-      type="password"
-      placeholder="Password"
-      bind:value={user.password}
-      on:blur={_handlePasswordBlur} />
-    <ErrorMessage error={errors.password} />
-  </div>
+    <div class="form-group">
+      <input
+        class:error={errors.password}
+        type="password"
+        placeholder="Password"
+        bind:value={user.password}
+        required />
+      <ErrorMessage error={errors.password} />
+    </div>
 
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
-New here?
-<p on:click={clicked}>Sign Up</p>
-<p id="last-p">Forgot password</p>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <ErrorMessage error={submissionError} />
+  </form>
+  New here?
+  <p on:click={clicked}>Sign Up</p>
+  <p id="last-p">Forgot password</p>
+{/if}

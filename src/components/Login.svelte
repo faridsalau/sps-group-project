@@ -60,9 +60,9 @@
     margin-bottom: 10px;
   }
 
-  #last-p {
+  /* #last-p {
     display: block;
-  }
+  } */
 
   p {
     color: #0073ba;
@@ -83,6 +83,11 @@
   .flex {
     display: flex;
     justify-content: center;
+  }
+
+  .sign-up {
+    display: flex;
+    flex-direction: column;
   }
 </style>
 
@@ -115,7 +120,14 @@
     <button type="submit" class="btn btn-primary">Login</button>
     <ErrorMessage error={submissionError} />
   </form>
-  New here?
-  <p on:click={clicked}>Sign Up</p>
-  <p id="last-p">Forgot password</p>
+  <div class="sign-up">
+    <div>
+      New here?
+      <p on:click={clicked}>Sign Up</p>
+    </div>
+    <div>
+
+      <p id="last-p">Forgot password</p>
+    </div>
+  </div>
 {/if}

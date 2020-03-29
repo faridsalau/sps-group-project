@@ -32,6 +32,7 @@
     setErrors();
     if (isEmpty(errors)) {
       loading = true;
+      newUser.username = newUser.username.toLowerCase();
       signup(newUser)
         .then(() => {
           loading = false;

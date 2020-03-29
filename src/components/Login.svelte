@@ -60,10 +60,6 @@
     margin-bottom: 10px;
   }
 
-  /* #last-p {
-    display: block;
-  } */
-
   p {
     color: #0073ba;
     font-size: 16px;
@@ -126,8 +122,7 @@
       <p on:click={clicked}>Sign Up</p>
     </div>
     <div>
-
-      <p id="last-p">Forgot password</p>
+      <p>Forgot password</p>
     </div>
   </div>
 {/if}

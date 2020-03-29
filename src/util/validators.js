@@ -14,6 +14,6 @@ export const isValidPassword = password => {
 };
 
 export const isValidUserName = username => {
-  const usernameRegEx = /^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+  const usernameRegEx = /^(?!.*[_\s-]{5,30})[a-zA-Z0-9][a-zA-Z0-9_\s\-]*[a-zA-Z0-9]$/;
   return username.match(usernameRegEx);
 };

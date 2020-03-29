@@ -1,60 +1,76 @@
 <script>
-	export let segment;
+  export let segment;
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
+  .navbar {
+    padding: 1rem 2rem;
+  }
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+  .logo {
+    color: #67bef4;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .active {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 0 2px;
+  }
 
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+  .page:hover {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    padding: 5px 10px;
+  }
 
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
+  span {
+    cursor: pointer;
+  }
 </style>
 
-<nav>
-	<ul>
-		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
-		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <span class="navbar-brand mb-0 h1 logo">mélangity</span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" />
+  </button>
 
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
-	</ul>
+  <div
+    class="collapse navbar-collapse justify-content-end"
+    id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link page" class:active={segment === undefined} href=".">
+          home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link page"
+          class:active={segment === 'create'}
+          href="create">
+          create post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link page"
+          class:active={segment === 'profile'}
+          href="profile">
+          profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link">log out</span>
+      </li>
+    </ul>
+  </div>
 </nav>

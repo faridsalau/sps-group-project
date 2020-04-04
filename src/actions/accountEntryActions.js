@@ -64,3 +64,11 @@ export const login = userData => {
     }
   });
 };
+
+export const logout = () => {
+  if (window.auth) {
+    window.auth.signOut().catch(() => {
+      alert("Something went wrong, please try again");
+    });
+  }
+};

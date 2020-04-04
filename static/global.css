@@ -5,6 +5,7 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #000000;
+  background: #ffffff;
 }
 
 h1,
@@ -67,6 +68,31 @@ code {
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
   color: #67bef4;
+}
+
+.navbar {
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: transparent;
+}
+
+.logo {
+  color: #67bef4;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ql-toolbar.ql-snow {
+  background-color: #ffffff;
+  border: none !important;
+}
+
+.ql-container.ql-snow {
+  border: none !important;
+  background-color: #ffffff;
 }
 
 @media (min-width: 400px) {

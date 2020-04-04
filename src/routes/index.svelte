@@ -13,16 +13,7 @@
     -o-background-size: cover;
     background-size: cover;
   }
-  nav {
-    color: #67bef4;
-  }
-  span {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  .navbar {
-    padding: 1rem 2rem;
-  }
+
   .definition {
     font-style: italic;
     color: #8cc9ff;
@@ -60,10 +51,6 @@
 <svelte:head>
   <title>mélangity | share your diverse perspective</title>
 </svelte:head>
-
-<nav class="navbar ">
-  <span class="navbar-brand mb-0 h1">mélangity</span>
-</nav>
 
 <div class="container">
   <p class="definition">mé·lange - a mixture; a medley.</p>

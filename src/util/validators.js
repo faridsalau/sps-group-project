@@ -13,6 +13,7 @@ export const isValidPassword = password => {
   return password.match(passwordRegEx);
 };
 
+// TODO: Find valid regex, this regex does not work
 export const isValidUserName = username => {
   const usernameRegEx = /^(?!.*[_\s-]{5,30})[a-zA-Z0-9][a-zA-Z0-9_\s\-]*[a-zA-Z0-9]$/;
   return username.match(usernameRegEx);

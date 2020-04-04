@@ -17,13 +17,13 @@
   });
 </script>
 
-<style>
-
-</style>
-
 <!-- TODO: Implement Nav component with cookie so quick flash does not occur-->
 {#if userInfo !== null}
   <Nav {segment} />
+{:else}
+  <nav class="navbar">
+    <span class="navbar-brand mb-0 h1 logo">mélangity</span>
+  </nav>
 {/if}
 
 <main>

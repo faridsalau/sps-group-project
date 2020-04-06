@@ -20,7 +20,6 @@
       theme: "snow",
       placeholder: "text(required)"
     });
-    console.log($iFeelYous);
   });
   function handleSubmit() {
     //   TODO: Add formatted text to post
@@ -45,7 +44,7 @@
           alert("Something went wrong, please try again");
         });
     } else {
-      console.log(errors);
+      console.error(errors);
     }
   }
   function setErrors(bodySummary) {

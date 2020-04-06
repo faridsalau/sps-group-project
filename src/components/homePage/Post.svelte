@@ -11,7 +11,6 @@
   const handleClick = () => {
     if (post) {
       if (!hasFeltPost(post.postId)) {
-        console.log("here");
         addIFeelYou(post.postId).then(() => {
           post.iFeelYouCount += 1;
           post.iFeelYouCount = post.iFeelYouCount;
@@ -31,8 +30,6 @@
             $iFeelYous = $iFeelYous.filter(
               iFeelYou => iFeelYou.postId !== post.postId
             );
-            $iFeelYous = $iFeelYous;
-            console.log($iFeelYous);
           })
           .catch(err => {
             console.error(err);

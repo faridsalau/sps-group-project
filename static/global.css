@@ -1,53 +1,102 @@
 body {
-	margin: 0;
-	font-family: 'Nunito', Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #000000;
+  margin: 0;
+  font-family: "Nunito", Roboto, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000000;
+  background: #ffffff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5em 0;
-	font-weight: 400;
-	line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5em 0;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 h1 {
-	font-size: 2em;
+  font-size: 2em;
 }
 
 a {
-	color: inherit;
+  color: inherit;
 }
 
 code {
-	font-family: menlo, inconsolata, monospace;
-	font-size: calc(1em - 2px);
-	color: #555;
-	background-color: #f0f0f0;
-	padding: 0.2em 0.4em;
-	border-radius: 2px;
+  font-family: menlo, inconsolata, monospace;
+  font-size: calc(1em - 2px);
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 2px;
 }
 
 .btn-primary {
-	background-color: #67bef4;
-	border-color: #67bef4;
+  background-color: #67bef4;
+  border-color: #67bef4;
 }
 
 .btn-primary:hover {
-	background-color: #80ceff;
-	border-color: #80ceff;
+  background-color: #80ceff;
+  border-color: #80ceff;
 }
 
-.btn-primary.focus, .btn-primary:focus {
-	color: #fff;
-	background-color: #71c9ff;
-	border-color: #71c9ff;
-	box-shadow: 0 0 0 0.2rem rgba(128, 227, 252, 0.5);
+.btn-primary.focus,
+.btn-primary:focus {
+  color: #fff;
+  background-color: #71c9ff;
+  border-color: #71c9ff;
+  box-shadow: 0 0 0 0.2rem rgba(128, 227, 252, 0.5);
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: #67bef4;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #67bef4;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #67bef4;
+}
+
+.navbar {
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: transparent;
+}
+
+.logo {
+  color: #67bef4;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ql-toolbar.ql-snow {
+  background-color: #ffffff;
+  border: none !important;
+}
+
+.ql-container.ql-snow {
+  border: none !important;
+  background-color: #ffffff;
 }
 
 @media (min-width: 400px) {
-	body {
-		font-size: 16px;
-	}
+  body {
+    font-size: 16px;
+  }
 }

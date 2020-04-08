@@ -1,20 +1,30 @@
 <script>
   import Nav from "../components/Nav.svelte";
+  import { authState } from "rxfire/auth";
+  import { collectionData } from "rxfire/firestore";
+  import { onMount } from "svelte";
+  import { map } from "rxjs/operators";
   export let segment;
+  let loggedIn$;
+  let userInfo;
+  onMount(() => {
+    if (window.auth) {
+      loggedIn$ = authState(auth).pipe(map(user => (user ? user : null)));
+      loggedIn$.subscribe(user => {
+        userInfo = user;
+      });
+    }
+  });
 </script>
 
-<style>
-  /* main {
-    position: relative;
-    max-width: 56em;
-    background-color: white;
-    padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
-  } */
-</style>
-
-<!-- <Nav {segment} /> -->
+<!-- TODO: Implement Nav component with cookie so quick flash does not occur-->
+{#if userInfo !== null}
+  <Nav {segment} />
+{:else}
+  <nav class="navbar">
+    <span class="navbar-brand mb-0 h1 logo">mélangity</span>
+  </nav>
+{/if}
 
 <main>
   <slot />

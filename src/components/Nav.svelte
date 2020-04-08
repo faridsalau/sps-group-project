@@ -1,60 +1,76 @@
 <script>
-	export let segment;
+  export let segment;
+  import { logout } from "../actions/accountEntryActions.js";
+  import { goto } from "@sapper/app";
+  const handleClick = async () => {
+    await goto("/home");
+  };
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
+  .active {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+  }
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+  .page:hover,
+  span:last-child:hover {
+    /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 10px; */
+    transform: scale(0.95);
+  }
 
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+  .nav-item {
+    margin: 0 0.5rem;
+  }
 
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
+  span {
+    cursor: pointer;
+  }
 </style>
 
-<nav>
-	<ul>
-		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
-		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
+<!-- TODO: Figure out why nav does not click onClick while in mobile view -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <span class="mb-0 h1 logo" on:click={handleClick}>mélangity</span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" />
+  </button>
 
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
-	</ul>
+  <div
+    class="collapse navbar-collapse justify-content-end"
+    id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link page" class:active={segment === 'home'} href="home">
+          home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link page"
+          class:active={segment === 'create'}
+          href="create">
+          create post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link page"
+          class:active={segment === 'profile'}
+          href="profile">
+          profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" on:click={logout}>log out</span>
+      </li>
+    </ul>
+  </div>
 </nav>

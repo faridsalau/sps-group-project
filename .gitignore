@@ -4,3 +4,7 @@
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
+/functions/__sapper__/
+firebase-debug.log
+fbAdminConfig.js
+.firebase/hosting.c3RhdGlj.cache

@@ -39,8 +39,9 @@
           document.querySelector("body").style.pointerEvents = "auto";
           await goto("/home");
         })
-        .catch(() => {
+        .catch(err => {
           loading = false;
+          console.log(err);
           alert("Something went wrong, please try again");
         });
     } else {

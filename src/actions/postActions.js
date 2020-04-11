@@ -11,10 +11,10 @@ export const createPost = (title, bodySummary, formattedBody) => {
       user.subscribe((user) => {
         currentUser = user;
       });
-
+      formattedBody = removeBrTags(formattedBody);
       if (currentUser) {
         let newPost = {
-          formattedBody: formattedBody.trim(),
+          formattedBody: formattedBody,
           bodySummary: bodySummary.trim(),
           title: title.trim(),
           createdAt: new Date().toISOString(),
@@ -169,4 +169,30 @@ export const removeIFeelYou = (postId) => {
       reject("Something went wrong, please try again");
     }
   });
+};
+
+export const getPostComments = (postId) => {
+  return new Promise((resolve, reject) => {
+    if (window.db) {
+      const db = window.db;
+      const commentsRef = db.collection("comments");
+      const query = commentsRef.where("postId", "==", postId);
+      collectionData(query, "commentId").subscribe((comments) => {
+        resolve(comments);
+      });
+    }
+  });
+};
+
+const removeBrTags = (str) => {
+  let div = document.createElement("div");
+  div.innerHTML = str;
+  let pTags = div.getElementsByTagName("p");
+
+  jQuery(pTags).each(function () {
+    if (jQuery(this).html() == "<br>") {
+      jQuery(this).remove();
+    }
+  });
+  return div.innerHTML;
 };

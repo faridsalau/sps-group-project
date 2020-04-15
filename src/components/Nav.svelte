@@ -1,6 +1,6 @@
 <script>
   export let segment;
-  import { logout } from "../actions/userActions.js";
+  import { logout } from "../actions/accountEntryActions.js";
   import { goto } from "@sapper/app";
   const handleClick = async () => {
     await goto("/home");

@@ -1,30 +1,34 @@
-<script context="module">
-  import { collectionData } from "rxfire/firestore";
-  import { getAllPosts } from "../../actions/postActions.js";
-  export async function preload(page, session) {
-    const unResolvedPosts = await getAllPosts();
-    const posts = await unResolvedPosts;
-    return { posts };
-  }
-</script>
-
 <script>
-  import { getUserIFeelYous } from "../../actions/userActions.js";
   import Posts from "../../components/homePage/Posts.svelte";
   import Filter from "../../components/homePage/Filter.svelte";
-  import { onMount } from "svelte";
-  import { user, iFeelYous } from "../../stores.js";
-
-  let hasIFeelYous = false;
-
-  $: if ($user && !$iFeelYous && !hasIFeelYous) {
-    getUserIFeelYous().then(iFeelYouList => {
-      $iFeelYous = iFeelYouList;
-      hasIFeelYous = true;
-    });
-  }
-
-  export let posts;
+  const body =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris";
+  const posts = [
+    {
+      username: "faridsalau",
+      createdAt: "2018-03-31T20:05:09.522Z",
+      title: "Writing articles about the problems we face",
+      body: body,
+      iFeelYouCount: 18,
+      commentCount: 29
+    },
+    {
+      username: "emmanouf",
+      createdAt: "2020-03-31T20:05:09.522Z",
+      title: "Learning English while pursing a CS Major",
+      body: body + " " + body,
+      iFeelYouCount: 180,
+      commentCount: 299
+    },
+    {
+      username: "rebehe",
+      createdAt: "2020-02-31T20:05:09.522Z",
+      title: "Working at Google",
+      body: body + " " + body,
+      iFeelYouCount: 10,
+      commentCount: 303
+    }
+  ];
 </script>
 
 <style>

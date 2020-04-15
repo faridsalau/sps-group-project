@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { getPostComments } from "../../actions/postActions.js";
   import { createEventDispatcher } from "svelte";
+  import CommentArea from "./CommentArea.svelte";
   import Comments from "../homePage/Comments.svelte";
   import Spinner from "../Spinner.svelte";
   import { fade } from "svelte/transition";
@@ -22,6 +23,9 @@
         loading = false;
       });
   });
+  const handleNewComment = event => {
+    postComments = [event.detail, ...postComments];
+  };
 </script>
 
 <style>
@@ -96,6 +100,7 @@
 
       <div class="modal-body">
         {@html post.formattedBody}
+        <CommentArea postId={post.postId} on:newComment={handleNewComment} />
       </div>
 
       {#if !loading}

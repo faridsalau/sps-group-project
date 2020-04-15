@@ -1,6 +1,5 @@
 import { user, iFeelYous } from "../stores.js";
 import { collectionData } from "rxfire/firestore";
-import { map } from "rxjs/operators";
 
 // TODO: Conditionally add username to posts
 export const createPost = (title, bodySummary, formattedBody) => {
@@ -180,6 +179,36 @@ export const getPostComments = (postId) => {
       collectionData(query, "commentId").subscribe((comments) => {
         resolve(comments);
       });
+    }
+  });
+};
+
+export const createComment = (body, postId) => {
+  return new Promise((resolve, reject) => {
+    if (window.db) {
+      const db = window.db;
+      let currentUser;
+      user.subscribe((user) => {
+        currentUser = user;
+      });
+
+      if (currentUser) {
+        let newComment = {
+          body,
+          postId,
+          createdAt: new Date().toISOString(),
+          username: currentUser.displayName,
+        };
+
+        db.collection("comments")
+          .add(newComment)
+          .then(() => {
+            resolve(newComment);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
     }
   });
 };

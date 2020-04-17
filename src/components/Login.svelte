@@ -3,7 +3,7 @@
   import { handleEmail, handlePassword } from "../util/accountEntry.js";
   import ErrorMessage from "./ErrorMessage.svelte";
   import { isEmpty } from "../util/utilFunctions.js";
-  import { login } from "../actions/accountEntryActions.js";
+  import { login } from "../actions/userActions.js";
   import Spinner from "./Spinner.svelte";
   // 'user' variable acts as component state, should not be refactored to another file
   let user = {

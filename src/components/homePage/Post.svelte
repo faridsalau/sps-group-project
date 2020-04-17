@@ -1,7 +1,42 @@
 <script>
   export let post;
   import { timeSince } from "../../util/utilFunctions.js";
+  import {
+    removeIFeelYou,
+    addIFeelYou,
+    hasFeltPost
+  } from "../../actions/postActions.js";
+  import { user, iFeelYous } from "../../stores.js";
   const timeSincePost = timeSince(post.createdAt);
+  const handleClick = () => {
+    if (post) {
+      if (!hasFeltPost(post.postId)) {
+        addIFeelYou(post.postId).then(() => {
+          post.iFeelYouCount += 1;
+          post.iFeelYouCount = post.iFeelYouCount;
+          $iFeelYous = [
+            {
+              username: $user.displayName,
+              postId: post.postId
+            },
+            ...$iFeelYous
+          ];
+        });
+      } else {
+        removeIFeelYou(post.postId)
+          .then(() => {
+            post.iFeelYouCount -= 1;
+            post.iFeelYouCount = post.iFeelYouCount;
+            $iFeelYous = $iFeelYous.filter(
+              iFeelYou => iFeelYou.postId !== post.postId
+            );
+          })
+          .catch(err => {
+            console.error(err);
+          });
+      }
+    }
+  };
 </script>
 
 <style>
@@ -74,10 +109,10 @@
 
     <h4 class="post-title">{post.title}</h4>
 
-    <p class="post-body">{post.body}</p>
+    <p class="post-body">{post.bodySummary}</p>
 
     <div class="post-engagment">
-      <button class="eng-btn shadow-sm" type="button">
+      <button class="eng-btn shadow-sm" type="button" on:click={handleClick}>
         I feel you
         <span class="count">{post.iFeelYouCount}</span>
       </button>

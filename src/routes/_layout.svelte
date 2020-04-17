@@ -1,6 +1,5 @@
 <script>
   import Nav from "../components/Nav.svelte";
-  import { user } from "../stores.js";
   import { authState } from "rxfire/auth";
   import { collectionData } from "rxfire/firestore";
   import { onMount } from "svelte";
@@ -10,7 +9,6 @@
   let userInfo;
   onMount(() => {
     if (window.auth) {
-      authState(window.auth).subscribe(u => ($user = u));
       loggedIn$ = authState(auth).pipe(map(user => (user ? user : null)));
       loggedIn$.subscribe(user => {
         userInfo = user;

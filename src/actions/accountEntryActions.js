@@ -1,8 +1,6 @@
 import { trimObjValues } from "../util/utilFunctions.js";
-import { user } from "../stores.js";
-import { collectionData } from "rxfire/firestore";
 
-export const signup = (newUserData) => {
+export const signup = newUserData => {
   return new Promise((resolve, reject) => {
     const alreadyFoundError = new Error("usernameAlreadyExists");
     if (window.db) {
@@ -11,7 +9,7 @@ export const signup = (newUserData) => {
       const auth = window.auth;
       db.doc(`/users/${newUser.username}`)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             throw alreadyFoundError;
           } else {
@@ -21,21 +19,18 @@ export const signup = (newUserData) => {
             );
           }
         })
-        .then((data) => {
-          data.user.updateProfile({
-            displayName: newUserData.username,
-          });
+        .then(data => {
           const userCredentials = {
             userId: data.user.uid,
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             email: newUser.email,
             username: newUser.username,
-            createdAt: new Date().toISOString(),
+            createdAt: new Date().toISOString()
           };
           resolve(db.doc(`/users/${newUser.username}`).set(userCredentials));
         })
-        .catch((err) => {
+        .catch(err => {
           let error = "Something went wrong, please try again";
           if (err === alreadyFoundError) {
             error = "An account with this username already exists";
@@ -51,7 +46,7 @@ export const signup = (newUserData) => {
   });
 };
 
-export const login = (userData) => {
+export const login = userData => {
   return new Promise((resolve, reject) => {
     if (window.auth) {
       const user = trimObjValues(userData);
@@ -75,24 +70,5 @@ export const logout = () => {
     window.auth.signOut().catch(() => {
       alert("Something went wrong, please try again");
     });
-  }
-};
-
-export const getUserIFeelYous = () => {
-  let currentUser;
-  user.subscribe((user) => {
-    currentUser = user;
-  });
-  if (window.db) {
-    const db = window.db;
-    const iFeelYousRef = db.collection("iFeelYous");
-    const query = iFeelYousRef.where("username", "==", currentUser.displayName);
-    return new Promise((resolve, reject) => {
-      collectionData(query, "iFeelYouId").subscribe((posts) => {
-        resolve(posts);
-      });
-    });
-  } else {
-    reject("Something went wrong please, try again.");
   }
 };

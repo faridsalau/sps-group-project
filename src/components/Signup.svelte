@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import ErrorMessage from "./ErrorMessage.svelte";
   import { isEmpty } from "../util/utilFunctions.js";
-  import { signup } from "../actions/userActions.js";
+  import { signup } from "../actions/accountEntryActions.js";
   import Spinner from "./Spinner.svelte";
   import {
     handleEmail,

@@ -18,8 +18,3 @@ export const isValidUserName = username => {
   const usernameRegEx = /^(?!.*[_\s-]{5,30})[a-zA-Z0-9][a-zA-Z0-9_\s\-]*[a-zA-Z0-9]$/;
   return username.match(usernameRegEx);
 };
-
-export const isValidTitle = str => {
-  const alphaNumericRegEx = /^[a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: !-]{1,100}$/;
-  return str.match(alphaNumericRegEx);
-};
